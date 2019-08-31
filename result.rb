@@ -1,8 +1,5 @@
 require "selenium-webdriver"
 
-#district = ARGV[0]
-
-
 def parse_page(values = {})
   district = values.dig(:district)
   section = values.dig(:section)
@@ -55,9 +52,7 @@ end
 
 page = ''
 
-districts = {
-  3 => 10
-}
+selected = ARGV[0]
 
 districts = {}
 lines = File.open('tables_all').readlines
@@ -65,8 +60,12 @@ lines.each do |l|
   content = l.split(' ')
   districts[content[0].to_i] = content[2].to_i
 end
+districts = if selected && districts.dig(selected.to_i)
+              districts.keep_if { |key| [selected.to_i].include?(key) }
+            else
+              districts.reject { |key| [1, 2].include?(key) }
+            end
 
-districts.reject! { |key| [1, 2].include?(key) }
 @wait = Selenium::WebDriver::Wait.new(:timeout => 6)
 i = 0
 @errors = []
