@@ -12,7 +12,7 @@ def parse_page(values = {})
   @wait.until {
     districto = driver.find_element(:id, 'site')
     districto_select = Selenium::WebDriver::Support::Select.new(districto)
-    districto_select.select_by(:value, "0#{district}   ")
+    districto_select.select_by(:value, "#{get_district_number(district)}   ")
 
     if district == 2
       seccion = driver.find_element(:id, 'secm')
@@ -41,6 +41,11 @@ def parse_page(values = {})
     driver.close
     sleep 3
   }
+end
+
+def get_district_number(number)
+  '0' + number if number < 10
+  number
 end
 
 def get_section_number(number)
