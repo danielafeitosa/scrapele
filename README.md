@@ -1,7 +1,7 @@
 # scrapele
 Scrap for https://www.padron.gov.ar/publica/
 
-Windows:
+Requirements (Windows):
 - Chrome https://www.google.com/intl/es-419/chrome/
 - Ruby https://rubyinstaller.org/downloads/
 - Java https://www.java.com/es/download/
@@ -9,12 +9,20 @@ Windows:
 - Selenium - Webdriver https://rubygems.org/gems/selenium-webdriver
 - ChromeDriver - WebDriver for Chrome https://sites.google.com/a/chromium.org/chromedriver/downloads
 
-Syntax: in Ruby command prompt, type:
+Start Selenium Server with command prompt:
+
+java -jar selenium-server-standalone.jar
+
+Put chromedriver.exe in C:\Windows\System32\
+
+Syntax:
+
+In Ruby command prompt, type:
 
 result.rb X
 
 Where X is district number in tables_all and district > 2.
 
-If no parameter given, it will scrap all districts.
+If no parameter given, it will scrap all districts > 2.
 
-For district 2, Buenos Aires
+For district 2, Buenos Aires, it will need seccion parameter.
