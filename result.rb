@@ -26,12 +26,7 @@ def parse_page(values = {})
     }
     mesa.send_keys(table)
     driver.find_element(id: 'btnVer').click
-    begin
-      @wait.until { driver.find_element(:id, "cuerpo") }
-    rescue Exception => e
-      puts "Could not find the data:\n Districto: #{district}\n Mesa: #{table}"
-      @errors << {district: district, section: section, table: table}
-    end
+    @wait.until { driver.find_element(:id, "cuerpo") }
     page = driver.page_source
 
     filename = "district#{district}_mesa#{table}.html"
@@ -44,8 +39,7 @@ def parse_page(values = {})
 end
 
 def get_district_number(number)
-  '0' + number if number < 10
-  number
+  number < 10 ? '0' + number.to_s : number
 end
 
 def get_section_number(number)
@@ -77,11 +71,31 @@ i = 0
 districts.each_pair do |district, tables|
   while i < tables do
     i += 1
-    parse_page(district: district, table: i)
+    begin
+      parse_page(district: district, table: i)
+    rescue Exception => e
+      puts "Could not find the data:\n Districto: #{district}\n Mesa: #{i}"
+      @errors << {district: district, table: i}
+    end
   end
 end
+
+retry_errors = []
 unless @errors.empty?
   @errors.each do |params|
-    parse_page(params)
+    begin
+      puts "Retyring #{params}"
+      parse_page(params)
+    rescue Exception => e
+      puts "  Could not find the data"
+      retry_errors << params
+    end
+  end
+end
+
+unless retry_errors.empty?
+  puts "We could not get these data:"
+  retry_errors.each do |error|
+    puts error
   end
 end
