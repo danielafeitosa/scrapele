@@ -2,6 +2,7 @@
 Scrap for https://www.padron.gov.ar/publica/
 
 Windows:
+- Chrome https://www.google.com/intl/es-419/chrome/
 - Ruby https://rubyinstaller.org/downloads/
 - Java https://www.java.com/es/download/
 - Selenium Standalone Server https://www.seleniumhq.org/download/
@@ -10,6 +11,10 @@ Windows:
 
 Syntax: in Ruby command prompt, type:
 
-result.rb XX
+result.rb X
 
-Where XX is district number in tables_all
+Where X is district number in tables_all and district > 2.
+
+If no parameter given, it will scrap all districts.
+
+For district 2, Buenos Aires
