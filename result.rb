@@ -33,7 +33,7 @@ def parse_page(values = {})
     File.open(filename, 'w+') do |f|
       f.puts page
     end
-    driver.close
+    driver.quit
     sleep 3
   }
 end
