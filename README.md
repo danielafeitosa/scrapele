@@ -27,6 +27,6 @@ If no parameter given, it will scrap all districts > 2.
 
 For district 2, Buenos Aires, use:
 
-result_2.rb
+result_02.rb
 
 For HTML parsing, we will use nokogiri (To Do)
