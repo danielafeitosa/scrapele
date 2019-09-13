@@ -25,8 +25,4 @@ Where X is district number in tables_all and district > 2.
 
 If no parameter given, it will scrap all districts > 2.
 
-For district 2, Buenos Aires, use:
-
-result_02.rb
-
 For HTML parsing, we will use nokogiri (To Do)
